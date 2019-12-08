@@ -7,11 +7,11 @@ import config from '../config';
 import './BookmarkItem.css';
 
 function deleteBookmarkRequest(bookmarkId, cb) {
-  fetch(config.API_ENDPOINT + `/${bookmarkId}`, {
+  fetch(config.API_ENDPOINT + `${bookmarkId}`, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json',
-      'authorization': `bearer ${config.API_KEY}`
+      'Authorization': `Bearer ${config.API_KEY}`
     }
   })
     .then(res => {
@@ -51,14 +51,15 @@ export default function BookmarkItem(props) {
             <Link to={`/edit/${props.id}`}>
               Edit Bookmark
             </Link>
+            {' '}
             <button
               className='BookmarkItem__description'
-              onClick={() => {
+              onClick={() =>
                 deleteBookmarkRequest(
                   props.id,
                   context.deleteBookmark,
                 )
-              }}
+              }
             >
               Delete
             </button>
